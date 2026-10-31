@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://bka5t5toeqbxp"]
+
+[ext_resource type="Script" path="res://scripts/camera.gd" id="1"]
+
+[node name="CameraContainer" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("limit_marker") groups=["Camera"]]
+limit_left = 0
+limit_top = 0
+limit_bottom = 96
+editor_draw_limits = true
+script = ExtResource("1")
+limit_marker = NodePath("../CameraLimit")
+
+[node name="CameraLimit" type="Marker2D" parent="."]
+position = Vector2(1590, 102)
+gizmo_extents = 32.0

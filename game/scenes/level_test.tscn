@@ -1,0 +1,54 @@
+[gd_scene load_steps=10 format=3 uid="uid://doaapiaxupxyc"]
+
+[ext_resource type="TileSet" uid="uid://b2g5uium88kqn" path="res://assets/structure_tileset.tres" id="1"]
+[ext_resource type="PackedScene" uid="uid://d8k524107ftr" path="res://scenes/ring.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://d31gfu63jic7" path="res://scenes/ring_side.tscn" id="3"]
+[ext_resource type="PackedScene" uid="uid://cas4oxs7ef368" path="res://scenes/spike.tscn" id="4"]
+[ext_resource type="PackedScene" uid="uid://14cm5srxvics" path="res://scenes/checkpoint.tscn" id="5"]
+[ext_resource type="PackedScene" uid="uid://sopim0hjd7ks" path="res://scenes/spawnpoint.tscn" id="6"]
+[ext_resource type="PackedScene" uid="uid://dyv4hdfivkye" path="res://scenes/bubble.tscn" id="7"]
+[ext_resource type="PackedScene" uid="uid://cdkp865m5uipv" path="res://scenes/moving_spike.tscn" id="8"]
+[ext_resource type="PackedScene" uid="uid://cuqkul2kxqy7k" path="res://scenes/exit_gate.tscn" id="9"]
+
+[node name="LevelTest" type="Node2D"]
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource("1")
+format = 2
+layer_0/tile_data = PackedInt32Array(0, 720897, 0, 65536, 720897, 0, 1, 720897, 0, 2, 720897, 0, 3, 720897, 0, 4, 720897, 0, 5, 720897, 0, 6, 720897, 0, 7, 720897, 0, 8, 720897, 0, 9, 720897, 0, 10, 720897, 0, 11, 720897, 0, 12, 720897, 0, 13, 720897, 0, 131072, 720897, 0, 196608, 720897, 0, 262144, 720897, 0, 327680, 720897, 0, 393216, 720897, 0, 458752, 720897, 0, 458753, 720897, 0, 458754, 720897, 0, 458755, 720897, 0, 458756, 720897, 0, 458757, 720897, 0, 458758, 720897, 0, 458759, 720897, 0, 458760, 720897, 0, 458761, 720897, 0, 458762, 720897, 0, 458763, 720897, 0, 458764, 720897, 0, 458765, 720897, 0, 458766, 720897, 0, 458767, 720897, 0, 458768, 720897, 0, 458769, 720897, 0, 458770, 720897, 0, 458771, 720897, 0, 458772, 720897, 0, 458773, 720897, 0, 458774, 720897, 0, 458775, 720897, 0, 458776, 720897, 0, 458777, 720897, 0, 14, 720897, 0, 15, 720897, 0, 16, 720897, 0, 17, 720897, 0, 18, 720897, 0, 19, 720897, 0, 20, 720897, 0, 21, 720897, 0, 22, 720897, 0, 23, 720897, 0, 24, 720897, 0, 25, 720897, 0, 26, 720897, 0, 458778, 720897, 0, 458779, 720897, 0, 458780, 720897, 0, 458781, 720897, 0, 458782, 720897, 0, 458783, 720897, 0, 458784, 720897, 0, 458785, 720897, 0, 458786, 720897, 0, 27, 720897, 0, 28, 720897, 0, 29, 720897, 0, 30, 720897, 0, 31, 720897, 0, 32, 720897, 0, 33, 720897, 0, 34, 720897, 0, 35, 720897, 0, 36, 720897, 0, 37, 720897, 0, 38, 720897, 0, 458787, 720897, 0, 458788, 720897, 0, 458789, 720897, 0, 458790, 720897, 0, 393233, 720897, 0, 327697, 720897, 0, 262161, 720897, 0, 196625, 720897, 0, 65558, 720897, 0, 131094, 720897, 0, 196630, 720897, 0, 262166, 720897, 0, 262152, 720897, 0, 196616, 720897, 0, 131080, 720897, 0, 65544, 720897, 0, 65548, 720897, 0, 131084, 720897, 0, 196620, 720897, 0, 262156, 720897, 0, 262169, 720897, 0, 327705, 720897, 0, 393241, 720897, 0, 262170, 655361, 1342177280, 327707, 655361, 1342177280, 393244, 655361, 1342177280, 327706, 720897, 0, 393242, 720897, 0, 393243, 720897, 0, 393249, 655361, 0, 327714, 655361, 0, 393250, 720897, 0, 327715, 720897, 0, 393251, 720897, 0, 393252, 720897, 0, 327716, 720897, 0, 327717, 720897, 0, 327718, 720897, 0, 393254, 720897, 0, 393253, 720897, 0, 131110, 720897, 0, 65574, 720897, 0, 39, 720897, 0, 40, 720897, 0, 41, 720897, 0, 42, 720897, 0, 458791, 720897, 0, 458792, 720897, 0, 458793, 720897, 0, 458794, 720897, 0, 458795, 720897, 0, 43, 720897, 0, 65579, 720897, 0, 131115, 720897, 0, 196651, 720897, 0, 262187, 720897, 0, 262188, 720897, 0, 196652, 720897, 0, 131116, 720897, 0, 65580, 720897, 0, 44, 720897, 0, 458796, 720897, 0)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+limit_left = 0
+limit_top = 0
+limit_bottom = -168
+
+[node name="Ring" parent="." instance=ExtResource("2")]
+position = Vector2(210, 30)
+
+[node name="RingSide" parent="." instance=ExtResource("3")]
+position = Vector2(282, 54)
+
+[node name="Spike" parent="." instance=ExtResource("4")]
+position = Vector2(54, 78)
+
+[node name="Checkpoint" parent="." instance=ExtResource("5")]
+position = Vector2(438, 42)
+
+[node name="Spawnpoint" parent="." instance=ExtResource("6")]
+position = Vector2(138, 78)
+
+[node name="Checkpoint2" parent="." instance=ExtResource("5")]
+position = Vector2(126, 30)
+
+[node name="Bubble" parent="." instance=ExtResource("7")]
+position = Vector2(378, 30)
+
+[node name="MovingSpike" parent="." instance=ExtResource("8")]
+position = Vector2(342, 18)
+init_direction = Vector2(-1, 0)
+
+[node name="ExitGate" parent="." instance=ExtResource("9")]
+position = Vector2(522, 66)
+
+[node name="Ring2" parent="." instance=ExtResource("2")]
+position = Vector2(462, 54)

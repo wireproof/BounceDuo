@@ -1,0 +1,58 @@
+[gd_scene load_steps=10 format=3 uid="uid://be6mrtc67bpg6"]
+
+[ext_resource type="Script" path="res://scripts/level_manager.gd" id="1"]
+[ext_resource type="PackedScene" uid="uid://c3lsw25cax8pr" path="res://scenes/Test Scenes/exit_sprite_test.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://dsd5tenlqpnx8" path="res://scenes/level_ui.tscn" id="3"]
+[ext_resource type="PackedScene" uid="uid://dg4vd07alfmvx" path="res://scenes/UI/main_menu.tscn" id="4"]
+[ext_resource type="PackedScene" uid="uid://en06vexcj1cn" path="res://scenes/UI/transition_screen.tscn" id="5"]
+[ext_resource type="Script" path="res://scripts/audio_manager.gd" id="6"]
+[ext_resource type="AudioStream" uid="uid://yaqqrlkwvf1y" path="res://assets/sfx/collect.ogg" id="7"]
+[ext_resource type="AudioStream" uid="uid://b1j7w4stu5b10" path="res://assets/sfx/secondary.ogg" id="8"]
+[ext_resource type="AudioStream" uid="uid://cmj7a2hu2bdic" path="res://assets/sfx/death.ogg" id="9"]
+
+[node name="LevelManager" type="Node" node_paths=PackedStringArray("hud_controller")]
+script = ExtResource("1")
+hud_controller = NodePath("LevelUi")
+levels = [ExtResource("2")]
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+custom_minimum_size = Vector2(0, 224)
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -112.0
+offset_bottom = 112.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 4
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+disable_3d = true
+handle_input_locally = false
+size = Vector2i(168, 224)
+render_target_update_mode = 4
+
+[node name="LevelUi" parent="." instance=ExtResource("3")]
+visible = false
+
+[node name="MainMenu" parent="." instance=ExtResource("4")]
+
+[node name="TransitionScreen" parent="." instance=ExtResource("5")]
+visible = false
+
+[node name="AudioManager" type="Node" parent="."]
+script = ExtResource("6")
+
+[node name="CollectPlayer" type="AudioStreamPlayer" parent="AudioManager"]
+stream = ExtResource("7")
+
+[node name="SecondaryPlayer" type="AudioStreamPlayer" parent="AudioManager"]
+stream = ExtResource("8")
+
+[node name="DeathPlayer" type="AudioStreamPlayer" parent="AudioManager"]
+stream = ExtResource("9")
+
+[connection signal="continue_game" from="MainMenu" to="." method="load_latest_level"]
+[connection signal="new_game" from="MainMenu" to="." method="start_game"]
+[connection signal="next_level" from="TransitionScreen" to="." method="play_next_level"]

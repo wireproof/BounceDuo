@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://sopim0hjd7ks"]
+
+[ext_resource type="Script" path="res://scripts/spawnpoint.gd" id="1"]
+
+[node name="Spawnpoint" type="Marker2D" groups=["spawnpoints"]]
+gizmo_extents = 12.0
+script = ExtResource("1")
+init_active = true

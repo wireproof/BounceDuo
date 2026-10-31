@@ -1,0 +1,57 @@
+[gd_scene load_steps=8 format=3 uid="uid://c77j5py52ysov"]
+
+[ext_resource type="Script" path="res://scripts/powerup.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://b7puquu6rnyqi" path="res://assets/Mobile - Bounce - General Sprites.png" id="2"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e3qtl"]
+atlas = ExtResource("2")
+region = Rect2(164, 24, 12, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p0fru"]
+atlas = ExtResource("2")
+region = Rect2(152, 24, 12, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qsxi3"]
+atlas = ExtResource("2")
+region = Rect2(140, 12, 12, 12)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_dyxka"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e3qtl")
+}],
+"loop": false,
+"name": &"flip",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p0fru")
+}],
+"loop": false,
+"name": &"jump",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qsxi3")
+}],
+"loop": false,
+"name": &"speed",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rgxxe"]
+size = Vector2(12, 12)
+
+[node name="Powerup" type="StaticBody2D"]
+collision_mask = 0
+script = ExtResource("1")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_dyxka")
+animation = &"speed"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_rgxxe")

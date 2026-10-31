@@ -1,0 +1,35 @@
+GDRE Tools v2.7.4
+macOS 27.0.1, headless
+Opening file: ~/Developer/BounceDuo/upstream/bounce.apk
+Loaded 96 imported files
+Detected Engine Version: 4.3.0.rc
+Detected Bytecode Revision: 4.3.0-stable (77af6ca)
+Successfully loaded PCK!
+Version: 4.3.0.rc
+Extracted 198 files, no errors detected!
+Saved project config.
+
+
+********************************EXPORT REPORT********************************
+
+Totals:                                 
+Decompiled scripts:                     30
+Scripts not decompiled:                 0
+Imported resources for export session:  96
+Successfully converted:                 96
+Lossy:                                  4
+Rewrote metadata:                       11
+Non-importable conversions:             0
+Not converted:                          0
+Failed conversions:                     0
+-------------
+
+
+
+------------------------------------------------------------------------------------
+
+Use Godot editor version 4.3.0.rc to edit the project.
+
+*******************************************************************************
+
+Recovery finished in 00m00s

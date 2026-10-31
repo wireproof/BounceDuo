@@ -1,0 +1,410 @@
+[gd_scene load_steps=17 format=3 uid="uid://d31gfu63jic7"]
+
+[ext_resource type="Script" path="res://scripts/ring.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://b7puquu6rnyqi" path="res://assets/Mobile - Bounce - General Sprites.png" id="2"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sf8t2"]
+atlas = ExtResource("2")
+region = Rect2(152, 60, 12, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pgskt"]
+atlas = ExtResource("2")
+region = Rect2(128, 60, 12, 12)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gdhfe"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sf8t2")
+}],
+"loop": true,
+"name": &"collected",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pgskt")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xxrp1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sf8t2")
+}],
+"loop": true,
+"name": &"collected",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pgskt")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xofew"]
+atlas = ExtResource("2")
+region = Rect2(164, 60, 12, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_44giq"]
+atlas = ExtResource("2")
+region = Rect2(140, 60, 12, 12)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_dvsam"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xofew")
+}],
+"loop": true,
+"name": &"collected",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_44giq")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tqueb"]
+size = Vector2(2, 2)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2vvaj"]
+size = Vector2(4, 18)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4lr5a"]
+size = Vector2(28, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_efqyk"]
+size = Vector2(2, 20)
+
+[sub_resource type="Animation" id="Animation_82y7b"]
+resource_name = "ring_off"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("WideSprites/AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"collected"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("WideSprites/AnimatedSprite2D2:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"collected"]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("WideSprites/AnimatedSprite2D3:animation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"collected"]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("WideSprites/AnimatedSprite2D4:animation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"collected"]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sprites/AnimatedSprite2D:animation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"collected"]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Sprites/AnimatedSprite2D2:animation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"collected"]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Sprites/AnimatedSprite2D3:animation")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"collected"]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Sprites/AnimatedSprite2D4:animation")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"collected"]
+}
+
+[sub_resource type="Animation" id="Animation_rriht"]
+resource_name = "ring_on"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("WideSprites/AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"default"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("WideSprites/AnimatedSprite2D2:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"default"]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("WideSprites/AnimatedSprite2D3:animation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"default"]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("WideSprites/AnimatedSprite2D4:animation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"default"]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sprites/AnimatedSprite2D:animation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"default"]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Sprites/AnimatedSprite2D2:animation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"default"]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Sprites/AnimatedSprite2D3:animation")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"default"]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Sprites/AnimatedSprite2D4:animation")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"default"]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_16tpq"]
+_data = {
+"ring_off": SubResource("Animation_82y7b"),
+"ring_on": SubResource("Animation_rriht")
+}
+
+[node name="RingSide" type="Node2D" groups=["Rings"]]
+script = ExtResource("1")
+
+[node name="WideSprites" type="Node2D" parent="."]
+visible = false
+position = Vector2(6, 0)
+rotation = 1.5708
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="WideSprites"]
+z_index = 1
+position = Vector2(0, 6)
+rotation = -1.5708
+sprite_frames = SubResource("SpriteFrames_gdhfe")
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="WideSprites"]
+z_index = 1
+position = Vector2(0, -6)
+rotation = -1.5708
+scale = Vector2(-1, 1)
+sprite_frames = SubResource("SpriteFrames_gdhfe")
+
+[node name="AnimatedSprite2D3" type="AnimatedSprite2D" parent="WideSprites"]
+z_index = -1
+position = Vector2(0, -6)
+rotation = -1.5708
+scale = Vector2(-1, -1)
+sprite_frames = SubResource("SpriteFrames_gdhfe")
+
+[node name="AnimatedSprite2D4" type="AnimatedSprite2D" parent="WideSprites"]
+z_index = -1
+position = Vector2(0, 6)
+rotation = -1.5708
+scale = Vector2(1, -1)
+sprite_frames = SubResource("SpriteFrames_xxrp1")
+
+[node name="Sprites" type="Node2D" parent="."]
+position = Vector2(6, 0)
+rotation = 1.5708
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Sprites"]
+z_index = 1
+position = Vector2(0, 6)
+rotation = -1.5708
+sprite_frames = SubResource("SpriteFrames_dvsam")
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="Sprites"]
+z_index = 1
+position = Vector2(0, -6)
+rotation = -1.5708
+scale = Vector2(-1, 1)
+sprite_frames = SubResource("SpriteFrames_dvsam")
+
+[node name="AnimatedSprite2D3" type="AnimatedSprite2D" parent="Sprites"]
+z_index = -1
+position = Vector2(0, -6)
+rotation = -1.5708
+scale = Vector2(-1, -1)
+sprite_frames = SubResource("SpriteFrames_dvsam")
+
+[node name="AnimatedSprite2D4" type="AnimatedSprite2D" parent="Sprites"]
+z_index = -1
+position = Vector2(0, 6)
+rotation = -1.5708
+scale = Vector2(1, -1)
+sprite_frames = SubResource("SpriteFrames_dvsam")
+
+[node name="Edges" type="StaticBody2D" parent="."]
+rotation = 1.5708
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Edges"]
+position = Vector2(-6.15398e-05, -17)
+shape = SubResource("RectangleShape2D_tqueb")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Edges"]
+position = Vector2(0, 5)
+shape = SubResource("RectangleShape2D_tqueb")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+rotation = 1.5708
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, -6)
+shape = SubResource("RectangleShape2D_2vvaj")
+debug_color = Color(0.868323, 0, 0.308379, 0.42)
+
+[node name="PlayerDetector" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector"]
+position = Vector2(6, 0)
+shape = SubResource("RectangleShape2D_4lr5a")
+debug_color = Color(0.654972, 0.512009, 0.216877, 0.133333)
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(6, 0)
+rotation = 1.5708
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_efqyk")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_16tpq")
+}
+
+[connection signal="body_entered" from="PlayerDetector" to="." method="_on_player_detector_body_entered"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

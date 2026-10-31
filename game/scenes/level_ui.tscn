@@ -1,0 +1,152 @@
+[gd_scene load_steps=12 format=3 uid="uid://dsd5tenlqpnx8"]
+
+[ext_resource type="Script" path="res://scripts/level_ui.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/AbilityBar.gd" id="2"]
+[ext_resource type="Texture2D" uid="uid://d2dueyt4kqa33" path="res://assets/buttons/left.svg" id="3"]
+[ext_resource type="Texture2D" uid="uid://cdh0l4tbybecx" path="res://assets/buttons/right.svg" id="4"]
+[ext_resource type="Texture2D" uid="uid://c3xbdqd4txi8p" path="res://assets/buttons/jump.svg" id="5"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_m4x0j"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7lnvf"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cx2qo"]
+bg_color = Color(0.0313726, 0.32549, 0.666667, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_8b4xq"]
+line_spacing = 0.0
+font_size = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yoqq3"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r8h5u"]
+size = Vector2(32, 32)
+
+[node name="LevelUi" type="CanvasLayer" node_paths=PackedStringArray("life_container", "ring_container", "score_label")]
+script = ExtResource("1")
+life_container = NodePath("fullrect/window/gamesize/Panel/MarginContainer/HBoxContainer/VBoxContainer/LifeList")
+ring_container = NodePath("fullrect/window/gamesize/Panel/MarginContainer/HBoxContainer/VBoxContainer/RingList")
+score_label = NodePath("fullrect/window/gamesize/Panel/ScoreMargin/ScoreLabel")
+
+[node name="fullrect" type="PanelContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_m4x0j")
+
+[node name="window" type="VBoxContainer" parent="fullrect"]
+custom_minimum_size = Vector2(0, 224)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 0
+
+[node name="gamesize" type="PanelContainer" parent="fullrect/window"]
+custom_minimum_size = Vector2(0, 128)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_7lnvf")
+
+[node name="Panel" type="PanelContainer" parent="fullrect/window/gamesize"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_styles/panel = SubResource("StyleBoxFlat_cx2qo")
+
+[node name="MarginContainer" type="MarginContainer" parent="fullrect/window/gamesize/Panel"]
+layout_mode = 2
+theme_override_constants/margin_left = 1
+theme_override_constants/margin_top = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="fullrect/window/gamesize/Panel/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="AbilityBar" type="ColorRect" parent="fullrect/window/gamesize/Panel/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(5, 31)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+color = Color(1, 0.596078, 0.0745098, 1)
+script = ExtResource("2")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="fullrect/window/gamesize/Panel/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme_override_constants/separation = 1
+
+[node name="LifeList" type="HBoxContainer" parent="fullrect/window/gamesize/Panel/MarginContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 12)
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="RingList" type="HBoxContainer" parent="fullrect/window/gamesize/Panel/MarginContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 12)
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="ScoreMargin" type="MarginContainer" parent="fullrect/window/gamesize/Panel"]
+layout_mode = 2
+theme_override_constants/margin_top = -8
+theme_override_constants/margin_right = 1
+
+[node name="ScoreLabel" type="Label" parent="fullrect/window/gamesize/Panel/ScoreMargin"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "0000000"
+label_settings = SubResource("LabelSettings_8b4xq")
+
+[node name="MarginContainer" type="PanelContainer" parent="fullrect/window"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_yoqq3")
+
+[node name="MarginContainer" type="MarginContainer" parent="fullrect/window/MarginContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 12
+
+[node name="HBoxContainer" type="HBoxContainer" parent="fullrect/window/MarginContainer/MarginContainer"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="Control" type="Control" parent="fullrect/window/MarginContainer/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+
+[node name="Left" type="TouchScreenButton" parent="fullrect/window/MarginContainer/MarginContainer/HBoxContainer/Control"]
+texture_normal = ExtResource("3")
+shape = SubResource("RectangleShape2D_r8h5u")
+shape_visible = false
+passby_press = true
+action = "move_left"
+
+[node name="Control2" type="Control" parent="fullrect/window/MarginContainer/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+
+[node name="Right" type="TouchScreenButton" parent="fullrect/window/MarginContainer/MarginContainer/HBoxContainer/Control2"]
+texture_normal = ExtResource("4")
+shape = SubResource("RectangleShape2D_r8h5u")
+shape_visible = false
+passby_press = true
+action = "move_right"
+
+[node name="Control3" type="Control" parent="fullrect/window/MarginContainer/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(16, 32)
+layout_mode = 2
+
+[node name="Control4" type="Control" parent="fullrect/window/MarginContainer/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+
+[node name="Jump" type="TouchScreenButton" parent="fullrect/window/MarginContainer/MarginContainer/HBoxContainer/Control4"]
+texture_normal = ExtResource("5")
+shape = SubResource("RectangleShape2D_r8h5u")
+shape_visible = false
+action = "jump"

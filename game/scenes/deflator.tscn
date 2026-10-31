@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://dvdi15c6n602y"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_q8miu"]
+load_path = "res://.godot/imported/Mobile - Bounce - General Sprites.png-dba8f13dab571b7f1b82f661df42b8c0.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_asaa6"]
+atlas = SubResource("CompressedTexture2D_q8miu")
+region = Rect2(164, 12, 12, 12)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_juqt6"]
+size = Vector2(12, 12)
+
+[node name="Deflator" type="StaticBody2D" groups=["Deflator"]]
+collision_layer = 16
+collision_mask = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_asaa6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_juqt6")

@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://3shgnitfbi8l"]
+
+[ext_resource type="Texture2D" uid="uid://b7puquu6rnyqi" path="res://assets/Mobile - Bounce - General Sprites.png" id="1"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_asaa6"]
+atlas = ExtResource("1")
+region = Rect2(152, 48, 12, 12)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_juqt6"]
+size = Vector2(12, 12)
+
+[node name="Inflator" type="StaticBody2D" groups=["Inflator"]]
+collision_layer = 16
+collision_mask = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_asaa6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_juqt6")

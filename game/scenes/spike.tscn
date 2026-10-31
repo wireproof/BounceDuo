@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://cas4oxs7ef368"]
+
+[ext_resource type="Script" path="res://scripts/spike.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://b7puquu6rnyqi" path="res://assets/Mobile - Bounce - General Sprites.png" id="2"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7w4ao"]
+atlas = ExtResource("2")
+region = Rect2(128, 36, 12, 12)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tpyrm"]
+size = Vector2(3, 11)
+
+[node name="Spike" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+script = ExtResource("1")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = -1
+texture = SubResource("AtlasTexture_7w4ao")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, 0.5)
+shape = SubResource("RectangleShape2D_tpyrm")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

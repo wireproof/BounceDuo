@@ -1,0 +1,31 @@
+[gd_scene load_steps=8 format=3 uid="uid://dqgem3yp3qbyy"]
+
+[ext_resource type="Script" path="res://scenes/UI/level_button.gd" id="1"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qlc0i"]
+bg_color = Color(0, 0, 0, 0.482353)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ikroh"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_svnrr"]
+bg_color = Color(0.412558, 0.778069, 0.895625, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vj6fm"]
+bg_color = Color(1, 1, 1, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_804p3"]
+bg_color = Color(0.315303, 0.554821, 0.614081, 1)
+
+[sub_resource type="Theme" id="Theme_r06ef"]
+Button/styles/disabled = SubResource("StyleBoxFlat_qlc0i")
+Button/styles/focus = SubResource("StyleBoxEmpty_ikroh")
+Button/styles/hover = SubResource("StyleBoxFlat_svnrr")
+Button/styles/normal = SubResource("StyleBoxFlat_vj6fm")
+Button/styles/pressed = SubResource("StyleBoxFlat_804p3")
+
+[node name="LevelButton" type="Button"]
+custom_minimum_size = Vector2(30, 30)
+size_flags_vertical = 8
+theme = SubResource("Theme_r06ef")
+text = "1"
+script = ExtResource("1")

@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://cgag8wy73k5vc"]
+
+[ext_resource type="Texture2D" uid="uid://b7puquu6rnyqi" path="res://assets/Mobile - Bounce - General Sprites.png" id="1"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dwmwh"]
+atlas = ExtResource("1")
+region = Rect2(152, 12, 12, 12)
+
+[node name="Life" type="TextureRect"]
+texture = SubResource("AtlasTexture_dwmwh")

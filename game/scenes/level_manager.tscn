@@ -1,0 +1,83 @@
+[gd_scene load_steps=20 format=3 uid="uid://dygp4mcmtpcl4"]
+
+[ext_resource type="Script" path="res://scripts/level_manager.gd" id="1"]
+[ext_resource type="PackedScene" uid="uid://bx1j8ryfkt8ak" path="res://scenes/Levels/level_01.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://cqoarf5tjj7gx" path="res://scenes/Levels/level_02.tscn" id="3"]
+[ext_resource type="PackedScene" uid="uid://ddqkl8updd3ef" path="res://scenes/Levels/level_03.tscn" id="4"]
+[ext_resource type="PackedScene" uid="uid://cheb41i8ta5qg" path="res://scenes/Levels/level_04.tscn" id="5"]
+[ext_resource type="PackedScene" uid="uid://o3ahjdtd1nyu" path="res://scenes/Levels/level_05.tscn" id="6"]
+[ext_resource type="PackedScene" uid="uid://bshfhnj6o20ue" path="res://scenes/Levels/level_06.tscn" id="7"]
+[ext_resource type="PackedScene" uid="uid://bu0kmi0nhtxr" path="res://scenes/Levels/level_07.tscn" id="8"]
+[ext_resource type="PackedScene" uid="uid://by26defnyvjml" path="res://scenes/Levels/level_08.tscn" id="9"]
+[ext_resource type="PackedScene" uid="uid://dbx45enxk4js2" path="res://scenes/Levels/level_09.tscn" id="10"]
+[ext_resource type="PackedScene" uid="uid://ldw2mbq7ysd3" path="res://scenes/Levels/level_10.tscn" id="11"]
+[ext_resource type="PackedScene" uid="uid://cd1uja5qdtrlq" path="res://scenes/Levels/level_11.tscn" id="12"]
+[ext_resource type="PackedScene" uid="uid://dsd5tenlqpnx8" path="res://scenes/level_ui.tscn" id="13"]
+[ext_resource type="PackedScene" uid="uid://dg4vd07alfmvx" path="res://scenes/UI/main_menu.tscn" id="14"]
+[ext_resource type="PackedScene" uid="uid://en06vexcj1cn" path="res://scenes/UI/transition_screen.tscn" id="15"]
+[ext_resource type="Script" path="res://scripts/audio_manager.gd" id="16"]
+[ext_resource type="AudioStream" uid="uid://yaqqrlkwvf1y" path="res://assets/sfx/collect.ogg" id="17"]
+[ext_resource type="AudioStream" uid="uid://b1j7w4stu5b10" path="res://assets/sfx/secondary.ogg" id="18"]
+[ext_resource type="AudioStream" uid="uid://cmj7a2hu2bdic" path="res://assets/sfx/death.ogg" id="19"]
+
+[node name="LevelManager" type="Node" node_paths=PackedStringArray("hud_controller")]
+script = ExtResource("1")
+hud_controller = NodePath("LevelUi")
+levels = [ExtResource("2"), ExtResource("3"), ExtResource("4"), ExtResource("5"), ExtResource("6"), ExtResource("7"), ExtResource("8"), ExtResource("9"), ExtResource("10"), ExtResource("11"), ExtResource("12")]
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+custom_minimum_size = Vector2(0, 224)
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -64.0
+offset_bottom = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 4
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+disable_3d = true
+handle_input_locally = false
+size = Vector2i(168, 224)
+render_target_update_mode = 4
+
+[node name="CanvasLayer" type="CanvasLayer" parent="SubViewportContainer/SubViewport"]
+layer = -1
+
+[node name="ColorRect" type="ColorRect" parent="SubViewportContainer/SubViewport/CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.635294, 0.827451, 0.890196, 1)
+
+[node name="LevelUi" parent="." instance=ExtResource("13")]
+visible = false
+
+[node name="MainMenu" parent="." instance=ExtResource("14")]
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="TransitionScreen" parent="." instance=ExtResource("15")]
+visible = false
+
+[node name="AudioManager" type="Node" parent="."]
+script = ExtResource("16")
+
+[node name="CollectPlayer" type="AudioStreamPlayer" parent="AudioManager"]
+stream = ExtResource("17")
+
+[node name="SecondaryPlayer" type="AudioStreamPlayer" parent="AudioManager"]
+stream = ExtResource("18")
+
+[node name="DeathPlayer" type="AudioStreamPlayer" parent="AudioManager"]
+stream = ExtResource("19")
+
+[connection signal="continue_game" from="MainMenu" to="." method="load_latest_level"]
+[connection signal="new_game" from="MainMenu" to="." method="start_game"]
+[connection signal="game_over" from="TransitionScreen" to="." method="end_game"]
+[connection signal="next_level" from="TransitionScreen" to="." method="play_next_level"]

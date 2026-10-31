@@ -1,0 +1,159 @@
+[gd_scene load_steps=9 format=3 uid="uid://dg4vd07alfmvx"]
+
+[ext_resource type="Script" path="res://scripts/main_menu.gd" id="1"]
+[ext_resource type="PackedScene" uid="uid://dsfyjnql5txht" path="res://scenes/UI/level_menu.tscn" id="2"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ym0d7"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cotxt"]
+bg_color = Color(0.412558, 0.778069, 0.895625, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qrac8"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6osld"]
+bg_color = Color(0.315303, 0.554821, 0.614081, 1)
+
+[sub_resource type="Theme" id="Theme_t8a2v"]
+Button/styles/focus = SubResource("StyleBoxEmpty_ym0d7")
+Button/styles/hover = SubResource("StyleBoxFlat_cotxt")
+Button/styles/normal = SubResource("StyleBoxFlat_qrac8")
+Button/styles/pressed = SubResource("StyleBoxFlat_6osld")
+
+[sub_resource type="LabelSettings" id="LabelSettings_fglpq"]
+line_spacing = 1.0
+font_size = 8
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1")
+
+[node name="MenuScreen" type="MarginContainer" parent="."]
+custom_minimum_size = Vector2(0, 128)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 6
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MenuScreen"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 0
+
+[node name="ContinueButton" type="Button" parent="MenuScreen/VBoxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_t8a2v")
+text = "Continue"
+
+[node name="NewGameButton" type="Button" parent="MenuScreen/VBoxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_t8a2v")
+text = "New Game"
+
+[node name="HighScoreButton" type="Button" parent="MenuScreen/VBoxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_t8a2v")
+text = "High Score"
+
+[node name="InstructionsButton" type="Button" parent="MenuScreen/VBoxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_t8a2v")
+text = "Instructions"
+
+[node name="ExitButton" type="Button" parent="MenuScreen/VBoxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_t8a2v")
+text = "Exit"
+
+[node name="HighscoreScreen" type="MarginContainer" parent="."]
+visible = false
+custom_minimum_size = Vector2(0, 128)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -81.5
+offset_top = -17.5
+offset_right = 81.5
+offset_bottom = 17.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 6
+
+[node name="HighscoreLabel" type="Label" parent="HighscoreScreen"]
+layout_mode = 2
+size_flags_vertical = 0
+text = "High Score: 0000000"
+horizontal_alignment = 1
+
+[node name="HighscoreBackButton" type="Button" parent="HighscoreScreen"]
+layout_mode = 2
+size_flags_vertical = 8
+theme = SubResource("Theme_t8a2v")
+text = "Back"
+
+[node name="InstructionsScreen" type="MarginContainer" parent="."]
+visible = false
+custom_minimum_size = Vector2(0, 128)
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -51.0
+offset_bottom = 51.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 6
+
+[node name="InstructionsLabel" type="Label" parent="InstructionsScreen"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+size_flags_vertical = 0
+text = "Guide the ball past many obstacles to pass through all the hoops and open the door to the next level. Use the arrow keys to move and spacebar to jump. Watch out for spikes. Collect crystals for extra points and a checkpoint. Collect crystal balls to give your ball an extra life."
+label_settings = SubResource("LabelSettings_fglpq")
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="InstructionsBackButton" type="Button" parent="InstructionsScreen"]
+layout_mode = 2
+size_flags_vertical = 8
+theme = SubResource("Theme_t8a2v")
+text = "Back"
+
+[node name="LevelMenu" parent="." instance=ExtResource("2")]
+visible = false
+custom_minimum_size = Vector2(0, 128)
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -64.5
+offset_bottom = 64.5
+
+[connection signal="pressed" from="MenuScreen/VBoxContainer/ContinueButton" to="." method="_on_continue_button_pressed"]
+[connection signal="pressed" from="MenuScreen/VBoxContainer/NewGameButton" to="." method="_on_new_game_button_pressed"]
+[connection signal="pressed" from="MenuScreen/VBoxContainer/HighScoreButton" to="." method="_on_high_score_button_pressed"]
+[connection signal="pressed" from="MenuScreen/VBoxContainer/InstructionsButton" to="." method="_on_instructions_button_pressed"]
+[connection signal="pressed" from="MenuScreen/VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]
+[connection signal="pressed" from="HighscoreScreen/HighscoreBackButton" to="." method="return_to_main_menu"]
+[connection signal="pressed" from="InstructionsScreen/InstructionsBackButton" to="." method="return_to_main_menu"]

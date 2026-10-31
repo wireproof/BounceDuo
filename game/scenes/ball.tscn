@@ -1,0 +1,80 @@
+[gd_scene load_steps=12 format=3 uid="uid://bddmdqba1o8ya"]
+
+[ext_resource type="Script" path="res://scripts/ball_root.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://bhp8swjujrw8" path="res://assets/big_ball.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://b7puquu6rnyqi" path="res://assets/Mobile - Bounce - General Sprites.png" id="3"]
+[ext_resource type="PackedScene" uid="uid://cvp1w1avcpfdl" path="res://scenes/Powerups/speed_powerup.tscn" id="4"]
+[ext_resource type="PackedScene" uid="uid://c1xbjwkq417iu" path="res://scenes/Powerups/jump_powerup.tscn" id="5"]
+[ext_resource type="PackedScene" uid="uid://lw3k80kdoomu" path="res://scenes/Powerups/flip_powerup.tscn" id="6"]
+[ext_resource type="AudioStream" uid="uid://b1j7w4stu5b10" path="res://assets/sfx/secondary.ogg" id="7"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_asrs4"]
+atlas = ExtResource("3")
+region = Rect2(128, 12, 12, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6r7os"]
+atlas = ExtResource("3")
+region = Rect2(152, 0, 12, 12)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_krarp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2")
+}],
+"loop": false,
+"name": &"big",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_asrs4")
+}],
+"loop": false,
+"name": &"dead",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6r7os")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_h8yx7"]
+radius = 5.95
+
+[node name="Ball" type="CharacterBody2D" groups=["Player"]]
+collision_layer = 2
+collision_mask = 17
+floor_stop_on_slope = false
+floor_max_angle = 1.22173
+safe_margin = 0.001
+script = ExtResource("1")
+JUMP_VELOCITY = -151.0
+ACCELERATION = 0.16
+DECELERATION = 0.15
+BOUNCE_MIN_VEL = 60.0
+BOUNCE_MULT = 0.5
+SINK_GRAVITY_MULT = 1.25
+BIG_FLOAT_SPEED = 135.0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_krarp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_h8yx7")
+debug_color = Color(0.912752, 0.174709, 0.587766, 0.42)
+
+[node name="SpeedPowerup" parent="." instance=ExtResource("4")]
+
+[node name="JumpPowerup" parent="." instance=ExtResource("5")]
+jump_multiplier = 2.12
+
+[node name="FlipPowerup" parent="." instance=ExtResource("6")]
+duration = 12.0
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7")

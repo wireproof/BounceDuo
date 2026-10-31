@@ -1,0 +1,5 @@
+.godot/
+build/
+*.ipa
+*.mobileprovision
+.DS_Store

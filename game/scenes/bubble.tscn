@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=3 uid="uid://dyv4hdfivkye"]
+
+[ext_resource type="Script" path="res://scripts/bubble.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://b7puquu6rnyqi" path="res://assets/Mobile - Bounce - General Sprites.png" id="2"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lhwto"]
+atlas = ExtResource("2")
+region = Rect2(164, 36, 12, 12)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_a8w64"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lhwto")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sqdf4"]
+size = Vector2(12, 12)
+
+[node name="Bubble" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+script = ExtResource("1")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+z_index = -1
+sprite_frames = SubResource("SpriteFrames_a8w64")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_sqdf4")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
