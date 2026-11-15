@@ -4,7 +4,7 @@ Bounce Duo is an iPhone and iPad adaptation of [Mycron’s Bounce (2001) Remake]
 
 ## Download
 
-[Download the v0.1.3 prerelease](https://github.com/wireproof/BounceDuo/releases/tag/v0.1.3-source.1). The IPA is unsigned and needs signing or a compatible sideloading environment. Minimum deployment target: iOS 15. App name: **Bounce**. Bundle identifier: `com.wireproof.bounce`.
+[Download the v0.1.4 prerelease](https://github.com/wireproof/BounceDuo/releases/tag/v0.1.4). The IPA is unsigned and needs signing or a compatible sideloading environment. Minimum deployment target: iOS 15. App name: **Bounce**. Bundle identifier: `com.wireproof.bounce`.
 
 ## Features
 
@@ -20,7 +20,7 @@ The port preserves the remake’s physics and levels. The graphics option recons
 
 ## Status and verification
 
-**v0.1.3 / build 4 is a development prerelease.** A signed copy of this completed build was installed and its version verified on an iPhone Duo and an 11-inch iPad Pro on November 15, 2026. The Duo’s existing save was migrated with matching readback hashes. The apps were not launched during that delivery, so it does not establish physical-device gameplay, controller, visual, or performance verification for this version.
+**v0.1.4 / build 5 is a development prerelease.** The approved remastered icon is included. The iOS release build and signature checks passed; device delivery verification is recorded separately. Physical-device gameplay and visual checks have not been performed for this version.
 
 Earlier builds received successful user gameplay feedback. Desktop checks covered movement, pause/resume, all 11 level scenes loading, and layout previews. Those checks are not a full campaign playthrough. The headless test harness has reported cleanup-time resource leaks. The published screenshots are development captures, not proof of the current physical-device appearance.
 

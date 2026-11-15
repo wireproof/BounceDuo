@@ -74,5 +74,10 @@
   {
     "path": "game/assets/sfx/death.ogg.import",
     "sha256": "a47ab779f379556f5329fc778cb3c156cf77d08e615536160944be550a9fb85c"
+  },
+  {
+    "path": "artwork/bounce-icon-approved.png",
+    "sha256": "208e5e33b2e35d6635e1f2eab2c587f290a39d5c420351b85562a671dd8486ee",
+    "bytes": 1918972
   }
 ]
