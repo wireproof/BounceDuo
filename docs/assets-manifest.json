@@ -1,5 +1,13 @@
 [
   {
+    "path": "artwork/bounce-icon-approved.png",
+    "sha256": "208e5e33b2e35d6635e1f2eab2c587f290a39d5c420351b85562a671dd8486ee"
+  },
+  {
+    "path": "game/assets/Mobile - Bounce - General Sprites.png",
+    "sha256": "d5c2bb256211f4fdf363a50a1d0164364e78f84180fac323501a6e67b21cc8e6"
+  },
+  {
     "path": "game/assets/Mobile - Bounce - General Sprites.png.import",
     "sha256": "5aa89a51e020378a449f09c1016bdb9e1f6f5efcebb0185dfef906d347d4b9d0"
   },
@@ -8,76 +16,83 @@
     "sha256": "07f786198caba1c7f76b33e63bc692b7680cb3a0b42d6e226693f923950c1227"
   },
   {
-    "path": "game/assets/exit.png.import",
-    "sha256": "3fa8a36ce54e5d72f7ca740232fcaccb6fa1e88fbe4205663eab0d374fe48a0a"
-  },
-  {
-    "path": "game/assets/Mobile - Bounce - General Sprites.png",
-    "sha256": "d5c2bb256211f4fdf363a50a1d0164364e78f84180fac323501a6e67b21cc8e6"
-  },
-  {
     "path": "game/assets/big_ball.png.import",
     "sha256": "d833457135d5df7ffcbc1e65962b21c507b5607a721fcbfb68c4531f4dff5bdd"
-  },
-  {
-    "path": "game/assets/structure_tileset.tres",
-    "sha256": "689fe19f7642fdf41e0b94192424660fce58a357472d691945d6079840e742c0"
-  },
-  {
-    "path": "game/assets/exit.png",
-    "sha256": "84ed0ea432635b7344a910ffa7d8d91111aeb88642d0620388987254f5e7c012"
   },
   {
     "path": "game/assets/buttons/jump.svg",
     "sha256": "a0632efb3f5f95bed2449d146812ea953c4cd7268887ab2faf0a513880171fb0"
   },
   {
-    "path": "game/assets/buttons/right.svg.import",
-    "sha256": "0bfac5e764806fdd6ed8bc13de6c4f75093ff3783fe0768c6f47f8b0fba6986a"
-  },
-  {
-    "path": "game/assets/buttons/right.svg",
-    "sha256": "9e9b3a3bba3c39b7055d0b80fbedecc29194a7958f215183acbcfc7d3ef8b4b4"
-  },
-  {
-    "path": "game/assets/buttons/left.svg.import",
-    "sha256": "e7a107af8a404dcb2775adde5ad721c0e3aee53968e796d43e820b68c293ba17"
+    "path": "game/assets/buttons/jump.svg.import",
+    "sha256": "a4301b888a5dfa684f6ddd6080d2a1bd8d475ad35a5bbf93ffda0e813db9f847"
   },
   {
     "path": "game/assets/buttons/left.svg",
     "sha256": "c6fc1ec082608885e344c808f584a55d49cde11791dbfeba0ecdbc0db2d650de"
   },
   {
-    "path": "game/assets/buttons/jump.svg.import",
-    "sha256": "a4301b888a5dfa684f6ddd6080d2a1bd8d475ad35a5bbf93ffda0e813db9f847"
+    "path": "game/assets/buttons/left.svg.import",
+    "sha256": "e7a107af8a404dcb2775adde5ad721c0e3aee53968e796d43e820b68c293ba17"
   },
   {
-    "path": "game/assets/sfx/secondary.ogg",
-    "sha256": "949538b20c9ce43b5c20a082ad13854e6170fd56903a0b38316c664ea0382667"
+    "path": "game/assets/buttons/right.svg",
+    "sha256": "9e9b3a3bba3c39b7055d0b80fbedecc29194a7958f215183acbcfc7d3ef8b4b4"
+  },
+  {
+    "path": "game/assets/buttons/right.svg.import",
+    "sha256": "0bfac5e764806fdd6ed8bc13de6c4f75093ff3783fe0768c6f47f8b0fba6986a"
+  },
+  {
+    "path": "game/assets/exit.png",
+    "sha256": "84ed0ea432635b7344a910ffa7d8d91111aeb88642d0620388987254f5e7c012"
+  },
+  {
+    "path": "game/assets/exit.png.import",
+    "sha256": "3fa8a36ce54e5d72f7ca740232fcaccb6fa1e88fbe4205663eab0d374fe48a0a"
+  },
+  {
+    "path": "game/assets/remastered/ball.png",
+    "sha256": "2e798027858f28cc2dda817a85f42ef1cfbb3e157f554742fd3e2a35ac7b27d2"
+  },
+  {
+    "path": "game/assets/remastered/ball.png.import",
+    "sha256": "e0fc6877ed8cbc15b081b3e59a2ded84d397739826bf3b018d9543c367cf5ae7"
+  },
+  {
+    "path": "game/assets/remastered/brick.png",
+    "sha256": "d32724330ea770ba2df40ba9663f0faa2acb8daec4ff3aead5fdceef7231fa41"
+  },
+  {
+    "path": "game/assets/remastered/brick.png.import",
+    "sha256": "2f8a1883c1218e0aae6fee6f646f9f56e23590e2580b5a12606d688f14a4703f"
   },
   {
     "path": "game/assets/sfx/collect.ogg",
     "sha256": "b9bd55ecb3231347d84d1aee12d96bf0c8bf73292468afcafd5d02347153d887"
   },
   {
-    "path": "game/assets/sfx/death.ogg",
-    "sha256": "d6df7de91a759acfdb41ef3d417e85140d3e25cf76c4cf3941948df376c41b17"
-  },
-  {
-    "path": "game/assets/sfx/secondary.ogg.import",
-    "sha256": "7af263253601d750c15784da4a0f9d730cd8ee52e242cc27c47c439caaf7c941"
-  },
-  {
     "path": "game/assets/sfx/collect.ogg.import",
     "sha256": "f58c19fd0f0b29bbf8eda717a0bf340c9f69fb918697e6890b842a37a3b58ff0"
+  },
+  {
+    "path": "game/assets/sfx/death.ogg",
+    "sha256": "d6df7de91a759acfdb41ef3d417e85140d3e25cf76c4cf3941948df376c41b17"
   },
   {
     "path": "game/assets/sfx/death.ogg.import",
     "sha256": "a47ab779f379556f5329fc778cb3c156cf77d08e615536160944be550a9fb85c"
   },
   {
-    "path": "artwork/bounce-icon-approved.png",
-    "sha256": "208e5e33b2e35d6635e1f2eab2c587f290a39d5c420351b85562a671dd8486ee",
-    "bytes": 1918972
+    "path": "game/assets/sfx/secondary.ogg",
+    "sha256": "949538b20c9ce43b5c20a082ad13854e6170fd56903a0b38316c664ea0382667"
+  },
+  {
+    "path": "game/assets/sfx/secondary.ogg.import",
+    "sha256": "7af263253601d750c15784da4a0f9d730cd8ee52e242cc27c47c439caaf7c941"
+  },
+  {
+    "path": "game/assets/structure_tileset.tres",
+    "sha256": "689fe19f7642fdf41e0b94192424660fce58a357472d691945d6079840e742c0"
   }
 ]

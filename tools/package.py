@@ -5,7 +5,7 @@ a=r/'build/Build/Products/Release-iphoneos/Bounce.app'
 p=plistlib.loads((a/'Info.plist').read_bytes())
 assert p['CFBundleIdentifier']=='com.wireproof.bounce'
 assert p['UIApplicationSceneManifest']['UISceneConfigurations']['UIWindowSceneSessionRoleApplication'][0]['UISceneDelegateClassName']=='BounceSceneDelegate'
-assert p['CFBundleShortVersionString']=='0.1.7'
+assert p['CFBundleShortVersionString']=='0.1.8'
 f=r/'dist'/f"{p['CFBundleIdentifier']}-{p['CFBundleShortVersionString']}-{p['CFBundleVersion']}.ipa"
 with zipfile.ZipFile(f,'w',zipfile.ZIP_DEFLATED) as z:
  for src in sorted(a.rglob('*')):

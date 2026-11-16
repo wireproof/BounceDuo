@@ -9,6 +9,8 @@ var fit_button: Button
 var fill_enabled := true
 var upscale_material: ShaderMaterial
 var upscale_enabled := false
+var graphics_mode := 2
+var remaster: Node
 var status_panel: PanelContainer
 var status_label: Label
 var ability_meter: ProgressBar
@@ -27,13 +29,17 @@ func _ready():
 	if prefs.load("user://graphics.cfg") == OK:
 		upscale_enabled = false # Retire blurry filtering, including previously saved Smooth.
 		fill_enabled = bool(prefs.get_value("graphics","fill",true))
+	remaster = Node.new()
+	remaster.set_script(load("res://scripts/remaster_controller.gd"))
+	manager.add_child.call_deferred(remaster)
+	graphics_mode = int(prefs.get_value("graphics","preview_mode",2))
 	fit_button = Button.new()
 	fit_button.pressed.connect(toggle_fill)
 	add_child(fit_button)
 	graphics_button = Button.new()
 	graphics_button.pressed.connect(toggle_graphics)
 	add_child(graphics_button)
-	apply_graphics()
+	call_deferred("apply_graphics")
 	for pair in [["move_left", "left"], ["move_right", "right"], ["jump", "jump"]]:
 		var button := TouchScreenButton.new()
 		button.texture_normal = load("res://assets/buttons/" + pair[1] + ".svg")
@@ -56,7 +62,7 @@ func _ready():
 	status_panel = PanelContainer.new()
 	status_panel.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	var background := StyleBoxFlat.new()
-	background.bg_color = Color(0.025,0.045,0.07,0.78)
+	background.bg_color = Color(0.025,0.045,0.07,0.45)
 	background.set_corner_radius_all(14)
 	status_panel.add_theme_stylebox_override("panel",background)
 	add_child(status_panel)
@@ -68,7 +74,7 @@ func _ready():
 	ability_meter.show_percentage = false
 	ability_meter.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(ability_meter)
-	for button in [pause_button,menu_button,fit_button]:
+	for button in [pause_button,menu_button,fit_button,graphics_button]:
 		button.add_theme_stylebox_override("normal",background.duplicate())
 	manager.get_node("LevelUi/fullrect/window/MarginContainer").hide()
 	manager.get_node("LevelUi/fullrect/window").custom_minimum_size.y = 128
@@ -105,10 +111,17 @@ func _input(event):
 func apply_graphics():
 	upscale_enabled = false
 	manager.get_node("SubViewportContainer").material = null
-	graphics_button.hide()
+	graphics_button.text = "Remaster" if graphics_mode == 2 else "Original"
+	if is_instance_valid(remaster) and remaster.is_inside_tree(): remaster.set_enabled(graphics_mode == 2)
+	if is_instance_valid(menu_button): _relayout()
 
 func toggle_graphics():
+	graphics_mode = 0 if graphics_mode == 2 else 2
 	apply_graphics()
+	var prefs := ConfigFile.new()
+	prefs.load("user://graphics.cfg")
+	prefs.set_value("graphics","preview_mode",graphics_mode)
+	prefs.save("user://graphics.cfg")
 
 func toggle_fill():
 	fill_enabled = not fill_enabled
@@ -144,7 +157,7 @@ func _notification(what):
 
 func _process(_delta):
 	if is_instance_valid(status_label):
-		status_label.text = "Lives %d   Rings %d   Score %d" % [manager.hud_controller.life_nodes.size(),manager.ring_count,manager.score]
+		status_label.text = ("Lives %d   Rings %d   Score %d" % [manager.hud_controller.life_nodes.size(),manager.ring_count,manager.score]) if get_tree().paused else ("Lives %d   Rings %d" % [manager.hud_controller.life_nodes.size(),manager.ring_count])
 		var bar = manager.get_node("LevelUi/fullrect/window/gamesize/Panel/MarginContainer/HBoxContainer/AbilityBar")
 		var timer: Timer = bar.timer
 		ability_meter.visible = status_panel.visible and is_instance_valid(timer) and not timer.is_stopped()
@@ -199,8 +212,14 @@ func _relayout():
 	container.set_anchors_preset(Control.PRESET_TOP_LEFT)
 	container.custom_minimum_size = Vector2.ZERO
 	container.position = origin
-	container.size = Vector2(logical_w,logical_h)
-	container.scale = Vector2(size.x/logical_w,size.y/logical_h) if immersive else Vector2.ONE*factor
+	var resolution := 4 if graphics_mode == 2 else 1
+	container.size = Vector2(logical_w,logical_h)*resolution
+	container.scale = (Vector2(size.x/logical_w,size.y/logical_h) if immersive else Vector2.ONE*factor)/resolution
+	var viewport: SubViewport = manager.get_node("SubViewportContainer/SubViewport")
+	viewport.size = Vector2i(int(logical_w),int(logical_h))*resolution
+	viewport.size_2d_override = Vector2i(int(logical_w),int(logical_h))
+	viewport.size_2d_override_stretch = true
+	viewport.canvas_item_default_texture_filter = Viewport.DEFAULT_CANVAS_ITEM_TEXTURE_FILTER_NEAREST
 	container.visible = game_visible
 	var hud: Control = manager.get_node("LevelUi/fullrect")
 	hud.set_anchors_preset(Control.PRESET_TOP_LEFT)
@@ -229,19 +248,23 @@ func _relayout():
 		var x := area.position.x + i*(button_size+gap)
 		if i == 2: x = area.end.x-button_size
 		controls[i].position = Vector2(x,controls_y if portrait else area.end.y-button_size)
+	var paused := get_tree().paused
 	pause_button.visible = game_visible
-	menu_button.visible = game_visible
-	graphics_button.hide()
-	fit_button.visible = game_visible and not portrait
+	pause_button.text = "Resume" if paused else "II"
+	menu_button.visible = game_visible and paused
+	graphics_button.visible = game_visible and paused
+	fit_button.visible = game_visible and paused and not portrait
 	fit_button.text = "Fill" if fill_enabled else "Fit"
-	for button in [pause_button,menu_button,fit_button]:
-		button.add_theme_font_size_override("font_size",int(toolbar_h*0.40))
-		button.size = Vector2(toolbar_h*1.75,toolbar_h)
+	for button in [pause_button,menu_button,fit_button,graphics_button]:
+		button.add_theme_font_size_override("font_size",int(toolbar_h*0.35))
+		button.size = Vector2(toolbar_h*2.2,toolbar_h)
+	pause_button.size.x = toolbar_h*1.6 if paused else toolbar_h*0.8
 	pause_button.position = area.position
-	menu_button.position = Vector2(area.end.x-menu_button.size.x,area.position.y)
-	fit_button.position = Vector2(menu_button.position.x-fit_button.size.x-gap,area.position.y)
-	status_panel.position = Vector2(pause_button.position.x+pause_button.size.x+gap,area.position.y)
-	status_panel.size = Vector2(maxf(1,fit_button.position.x-gap-status_panel.position.x),toolbar_h)
-	status_label.add_theme_font_size_override("font_size",int(toolbar_h*0.32))
-	ability_meter.position = status_panel.position+Vector2(0,toolbar_h+4)
-	ability_meter.size = Vector2(status_panel.size.x,toolbar_h*0.12)
+	menu_button.position = area.get_center()-Vector2(menu_button.size.x/2,toolbar_h*1.8)
+	graphics_button.position = menu_button.position+Vector2(0,toolbar_h+gap)
+	fit_button.position = graphics_button.position+Vector2(0,toolbar_h+gap)
+	status_label.add_theme_font_size_override("font_size",int(toolbar_h*0.28))
+	status_panel.size = Vector2(toolbar_h*(5.5 if paused else 3.4),toolbar_h*0.65)
+	status_panel.position = Vector2(area.end.x-status_panel.size.x,area.position.y)
+	ability_meter.position = status_panel.position+Vector2(0,status_panel.size.y+4)
+	ability_meter.size = Vector2(status_panel.size.x,toolbar_h*0.08)
