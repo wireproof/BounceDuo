@@ -4,28 +4,28 @@ Bounce Duo is an iPhone and iPad adaptation of [Mycron’s Bounce (2001) Remake]
 
 ## Download
 
-[Download the v0.1.6 prerelease](https://github.com/wireproof/BounceDuo/releases/tag/v0.1.6). The IPA is unsigned and needs signing or a compatible sideloading environment. Minimum deployment target: iOS 15. App name: **Bounce**. Bundle identifier: `com.wireproof.bounce`.
+[Download the v0.1.7 prerelease](https://github.com/wireproof/BounceDuo/releases/tag/v0.1.7). The IPA is unsigned and needs signing or a compatible sideloading environment. Minimum deployment target: iOS 15. App name: **Bounce**. Bundle identifier: `com.wireproof.bounce`.
 
 ## Features
 
 - Fully offline gameplay with all game assets bundled.
-- Large left/right buttons grouped together and a separate jump button.
+- Compact rounded left/right controls and a separate jump button, with larger proportional toolbar targets.
 - Adaptive portrait and landscape layouts with aspect-preserving graphics.
 - Pause, Resume, Menu, and automatic pause when the app loses focus.
 - Controller D-pad and A-button input mappings. Movement buttons automatically hide on controller connection/input or keyboard use, and return on touchscreen input. Hidden controls release their reserved layout space.
-- Landscape Fill mode uses the entire game window with translucent controls and a compact HUD overlay; Fit restores the original framing. The horizontal camera span adapts to the display, retaining the 96-unit vertical playfield. Toolbar and touch targets respect safe areas.
-- Saved **Smooth / Original** filtering: Smooth interpolates pixel edges; Original retains crisp nearest-neighbor pixels.
+- Landscape Fill mode uses the entire game window with translucent controls and a readable top-row lives, rings, score, and power-up timer display; Fit restores the original framing. The horizontal camera span adapts to the display, retaining the 96-unit vertical playfield. Toolbar and touch targets respect safe areas.
+- Crisp Original graphics. The blurry Smooth option is disabled, including previously saved Smooth preferences.
 - Level-unlock and high-score persistence. Continue restarts the unlocked level; it does not restore an exact mid-level snapshot.
 
-The port preserves the remake’s physics and levels. The graphics option smooths the existing pixels; it is not a replacement set of painted HD assets. HUD and control artwork retain their original rendering.
+The port preserves the remake’s physics and levels. This update improves controls and HUD presentation; replacement remastered game artwork remains a separate prototype.
 
 ## Status and verification
 
-**v0.1.6 / build 7 is a development prerelease.** The approved remastered icon is included. The iOS release build and signature checks passed; device delivery verification is recorded separately. Physical-device gameplay and visual checks have not been performed for this version.
+**v0.1.7 / build 8 is a development prerelease.** The approved remastered icon is included. The iOS release build and signature checks passed; device delivery verification is recorded separately. Physical-device gameplay and visual checks have not been performed for this version.
 
 Earlier builds received successful user gameplay feedback. Desktop checks covered movement, pause/resume, all 11 level scenes loading, and layout previews. Those checks are not a full campaign playthrough. The headless test harness has reported cleanup-time resource leaks. The published screenshots are development captures, not proof of the current physical-device appearance.
 
-![Portrait development preview](docs/layout-440x900.png)
+![Landscape development preview](docs/ui-017/ui-1280x900.png)
 
 ## Build
 

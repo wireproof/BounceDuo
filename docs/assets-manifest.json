@@ -29,7 +29,7 @@
   },
   {
     "path": "game/assets/buttons/jump.svg",
-    "sha256": "e0717200b0634c714bc71160360ffe3b8cb915a03bb2a6c086dff8a760a1f1e5"
+    "sha256": "a0632efb3f5f95bed2449d146812ea953c4cd7268887ab2faf0a513880171fb0"
   },
   {
     "path": "game/assets/buttons/right.svg.import",
@@ -37,7 +37,7 @@
   },
   {
     "path": "game/assets/buttons/right.svg",
-    "sha256": "283b17942fc85cb43a2f05f6812703935ed3b0b026a813017d803acc59ac945e"
+    "sha256": "9e9b3a3bba3c39b7055d0b80fbedecc29194a7958f215183acbcfc7d3ef8b4b4"
   },
   {
     "path": "game/assets/buttons/left.svg.import",
@@ -45,7 +45,7 @@
   },
   {
     "path": "game/assets/buttons/left.svg",
-    "sha256": "5bb967da03a3beca0eca9b8afd60137dceea51d34c27c402841871c879c1e5c1"
+    "sha256": "c6fc1ec082608885e344c808f584a55d49cde11791dbfeba0ecdbc0db2d650de"
   },
   {
     "path": "game/assets/buttons/jump.svg.import",

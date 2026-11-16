@@ -1,0 +1,1 @@
+Desktop Godot 4.3 checks passed: responsive toolbar and smaller controls at 1280x900, 2732x1920 and 1194x834; crisp filtering; HUD score; ability timer; controller auto-hide. Movement, pause/resume and all 11 level scenes passed. Headless exit reports existing resource cleanup warnings. These previews are not physical iOS device tests.
