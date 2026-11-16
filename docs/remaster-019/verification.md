@@ -1,0 +1,3 @@
+Remaster art pass: ball/terrain, ring quarters (gold/silver, normal/wide, both orientations), stationary and moving hazards, exit frame and animated gate panels, checkpoint states, inflation/deflation, speed/jump/gravity blocks, bubbles, animated water and death burst. Menu styling and remastered portrait HUD included. Original rendering remains selectable.
+
+Verified desktop render gallery and captures from all 11 levels; 1085 collision states unchanged; all overridden materials restored; ring collection, death/revive, pause toggles and gate opening exercised. Shader drawing changes no gameplay geometry or timing. Known test harness cleanup warnings remain. These checks are not a full campaign playthrough or physical iOS testing.

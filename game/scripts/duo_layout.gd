@@ -85,6 +85,7 @@ func _ready():
 		InputMap.action_add_event(action, event)
 	Input.joy_connection_changed.connect(_joy_connection_changed)
 	touch_controls = Input.get_connected_joypads().is_empty()
+	_style_menus()
 	_relayout()
 
 func _joy_connection_changed(_device: int, connected: bool):
@@ -231,8 +232,8 @@ func _relayout():
 	manager.get_node("LevelUi/fullrect/window/gamesize").size.y = logical_h
 	manager.get_node("LevelUi/fullrect/window").size.y = logical_h
 	hud.size = Vector2(168,logical_h)
-	hud.visible = game_visible and not immersive
-	status_panel.visible = game_visible and immersive
+	hud.visible = game_visible and not immersive and graphics_mode == 0
+	status_panel.visible = game_visible and (immersive or graphics_mode == 2)
 	for name in ["MainMenu","TransitionScreen"]:
 		var panel: Control = manager.get_node(name)
 		var f := minf(area.size.x/168.0,area.size.y/224.0)
@@ -268,3 +269,32 @@ func _relayout():
 	status_panel.position = Vector2(area.end.x-status_panel.size.x,area.position.y)
 	ability_meter.position = status_panel.position+Vector2(0,status_panel.size.y+4)
 	ability_meter.size = Vector2(status_panel.size.x,toolbar_h*0.08)
+
+func _style_menus():
+	var menu: Control = manager.get_node("MainMenu")
+	menu.texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR
+	var title := Label.new()
+	title.text = "BOUNCE"
+	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	title.add_theme_font_size_override("font_size",23)
+	title.add_theme_color_override("font_color",Color(1,.65,.1))
+	var stack = menu.get_node("MenuScreen/VBoxContainer")
+	stack.add_theme_constant_override("separation",2)
+	stack.add_child(title)
+	stack.move_child(title,0)
+	title.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_style_menu_nodes(menu)
+
+func _style_menu_nodes(node: Node):
+	if node is Button:
+		var panel := StyleBoxFlat.new()
+		panel.bg_color = Color(.025,.12,.20,.94)
+		panel.set_corner_radius_all(4)
+		panel.set_content_margin_all(3)
+		node.add_theme_stylebox_override("normal",panel)
+		var active = panel.duplicate()
+		active.bg_color = Color(.10,.35,.48)
+		node.add_theme_stylebox_override("pressed",active)
+		node.add_theme_stylebox_override("hover",active)
+		node.add_theme_color_override("font_color",Color(.9,.96,1))
+	for child in node.get_children(): _style_menu_nodes(child)
