@@ -5,6 +5,8 @@ var controls: Array[TouchScreenButton] = []
 var pause_button: Button
 var menu_button: Button
 var graphics_button: Button
+var fit_button: Button
+var fill_enabled := true
 var upscale_material: ShaderMaterial
 var upscale_enabled := true
 var last_size := Vector2.ZERO
@@ -21,6 +23,10 @@ func _ready():
 	var prefs := ConfigFile.new()
 	if prefs.load("user://graphics.cfg") == OK:
 		upscale_enabled = bool(prefs.get_value("graphics","upscale",true))
+		fill_enabled = bool(prefs.get_value("graphics","fill",true))
+	fit_button = Button.new()
+	fit_button.pressed.connect(toggle_fill)
+	add_child(fit_button)
 	graphics_button = Button.new()
 	graphics_button.pressed.connect(toggle_graphics)
 	add_child(graphics_button)
@@ -84,7 +90,16 @@ func toggle_graphics():
 	upscale_enabled = not upscale_enabled
 	apply_graphics()
 	var prefs := ConfigFile.new()
+	prefs.load("user://graphics.cfg")
 	prefs.set_value("graphics","upscale",upscale_enabled)
+	prefs.save("user://graphics.cfg")
+
+func toggle_fill():
+	fill_enabled = not fill_enabled
+	_relayout()
+	var prefs := ConfigFile.new()
+	prefs.load("user://graphics.cfg")
+	prefs.set_value("graphics","fill",fill_enabled)
 	prefs.save("user://graphics.cfg")
 
 func clear_input():
@@ -136,7 +151,7 @@ func _relayout():
 	var unit := minf(area.size.x, area.size.y)
 	var gap := unit * 0.025
 	var button_size := unit * (0.23 if portrait else 0.19)
-	var toolbar_h := unit * 0.10
+	var toolbar_h := minf(unit * 0.075,60.0)
 	var play_area := area
 	play_area.position.y += toolbar_h + gap
 	play_area.size.y -= toolbar_h + gap
@@ -145,19 +160,26 @@ func _relayout():
 	elif touch_controls:
 		play_area.position.x += button_size * 2 + gap * 2
 		play_area.size.x -= button_size * 3 + gap * 4
-	var factor := play_area.size.x / 168.0
+	var immersive := fill_enabled and not portrait
+	var logical_w := 168.0
+	var factor := play_area.size.x / logical_w
 	# The original camera uses 96-pixel vertical bands; preserve that view.
 	var logical_h := 128.0
 	factor = minf(factor, play_area.size.y / logical_h)
-	var origin := play_area.position + Vector2((play_area.size.x-168*factor)/2,0)
+	var origin := play_area.position + Vector2((play_area.size.x-logical_w*factor)/2,0)
+	if immersive:
+		logical_h = 96.0
+		logical_w = roundf(logical_h * size.x / size.y)
+		factor = size.y / logical_h
+		origin = Vector2.ZERO
 	var container: Control = manager.get_node("SubViewportContainer")
+	manager.get_node("SubViewportContainer/SubViewport").size = Vector2i(int(logical_w),int(logical_h))
 	container.set_anchors_preset(Control.PRESET_TOP_LEFT)
 	container.custom_minimum_size = Vector2.ZERO
 	container.position = origin
-	container.size = Vector2(168,logical_h)
-	container.scale = Vector2.ONE*factor
+	container.size = Vector2(logical_w,logical_h)
+	container.scale = Vector2(size.x/logical_w,size.y/logical_h) if immersive else Vector2.ONE*factor
 	container.visible = game_visible
-	manager.get_node("SubViewportContainer/SubViewport").size = Vector2i(168,int(logical_h))
 	var hud: Control = manager.get_node("LevelUi/fullrect")
 	hud.set_anchors_preset(Control.PRESET_TOP_LEFT)
 	hud.position = origin
@@ -168,6 +190,15 @@ func _relayout():
 	manager.get_node("LevelUi/fullrect/window/gamesize").size.y = logical_h
 	manager.get_node("LevelUi/fullrect/window").size.y = logical_h
 	hud.size = Vector2(168,logical_h)
+	# Keep the existing score, lives, rings and ability meter as a compact overlay.
+	if immersive:
+		var hud_factor := minf(area.size.x * 0.36 / 168.0, 2.8)
+		hud.scale = Vector2.ONE * hud_factor
+		hud.position = Vector2(area.get_center().x - 84.0 * hud_factor,area.end.y - 32.0 * hud_factor)
+		for part in ["fullrect/window/gamesize", "fullrect/window", "fullrect"]:
+			var control: Control = manager.get_node("LevelUi/" + part)
+			control.custom_minimum_size.y = 32
+			control.size = Vector2(168,32)
 	for name in ["MainMenu","TransitionScreen"]:
 		var panel: Control = manager.get_node(name)
 		var f := minf(area.size.x/168.0,area.size.y/224.0)
@@ -177,6 +208,7 @@ func _relayout():
 		panel.position = area.position + (area.size-Vector2(168,224)*f)/2
 	var controls_y := minf(origin.y+logical_h*factor+gap*2,area.end.y-button_size)
 	for i in range(3):
+		controls[i].modulate.a = 0.55 if immersive else 1.0
 		controls[i].visible = touch_controls and game_visible and not get_tree().paused
 		controls[i].scale = Vector2.ONE * button_size/32.0
 		var x := area.position.x + i*(button_size+gap)
@@ -185,9 +217,13 @@ func _relayout():
 	pause_button.visible = game_visible
 	menu_button.visible = game_visible
 	graphics_button.visible = game_visible
-	for button in [pause_button,menu_button,graphics_button]:
+	fit_button.visible = game_visible and not portrait
+	fit_button.text = "Fill" if fill_enabled else "Fit"
+	for button in [pause_button,menu_button,graphics_button,fit_button]:
 		button.add_theme_font_size_override("font_size",int(toolbar_h*0.46))
 		button.size = Vector2(toolbar_h*2.3,toolbar_h)
 	pause_button.position = Vector2(area.position.x,area.position.y)
 	menu_button.position = Vector2(area.end.x-menu_button.size.x,area.position.y)
-	graphics_button.position = Vector2(area.get_center().x-graphics_button.size.x/2,area.position.y)
+	graphics_button.position = Vector2(area.get_center().x-graphics_button.size.x-gap/2,area.position.y)
+	fit_button.position = Vector2(area.get_center().x+gap/2,area.position.y)
+	if portrait: graphics_button.position.x = area.get_center().x-graphics_button.size.x/2

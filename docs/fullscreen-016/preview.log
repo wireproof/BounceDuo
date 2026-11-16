@@ -1,0 +1,15 @@
+sandbox_extension_issue_file_to_process failed for /tmp/bounce-fill-tools/Godot.app: 1 (Operation not permitted)
+Godot Engine v4.3.stable.official.77dcf97d8 - https://godotengine.org
+OpenGL API 4.1 Metal - 91.7 - Compatibility - Using Device: Apple - Apple M2 Pro
+
+Ring count is 6
+Respawning...
+fullrect pos=(412.48, 805.3257) size=(168, 32) min=(81, 32)
+fullrect/window pos=(0, 0) size=(168, 32) min=(81, 32)
+fullrect/window/gamesize pos=(0, 0) size=(168, 32) min=(81, 32)
+fullrect/window/gamesize/Panel pos=(0, 1) size=(168, 31) min=(81, 31)
+fullrect pos=(412.48, 805.3257) size=(168, 32) min=(81, 32)
+fullrect/window pos=(0, 0) size=(168, 32) min=(81, 32)
+fullrect/window/gamesize pos=(0, 0) size=(168, 32) min=(81, 32)
+fullrect/window/gamesize/Panel pos=(0, 1) size=(168, 31) min=(81, 31)
+PASS: Fill covers 1280x900 viewport; Original and Smooth rendered; Fit restored

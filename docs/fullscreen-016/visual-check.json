@@ -1,0 +1,10 @@
+{
+  "renderer": "desktop Godot GL compatibility",
+  "duoLayout": [
+    1280,
+    900
+  ],
+  "smoothChangedPixelFraction": 0.30018318965517243,
+  "fullViewportCoverage": true,
+  "physicalDeviceVisualTest": false
+}

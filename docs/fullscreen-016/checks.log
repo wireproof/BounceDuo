@@ -1,0 +1,52 @@
+sandbox_extension_issue_file_to_process failed for /tmp/bounce-fill-tools/Godot.app: 1 (Operation not permitted)
+Godot Engine v4.3.stable.official.77dcf97d8 - https://godotengine.org
+
+Ring count is 6
+Respawning...
+Bounce value: 1
+PASS: keyboard/controller hide controls, touch restores, game expands
+PASS: Duo and iPad landscape Fill covers full viewport
+Ring count is 6
+Respawning...
+LEVEL 1 OK
+Ring count is 8
+Respawning...
+Bounce value: 1
+LEVEL 2 OK
+Ring count is 9
+Respawning...
+LEVEL 3 OK
+Ring count is 7
+Respawning...
+LEVEL 4 OK
+Ring count is 10
+Respawning...
+Bounce value: 1
+LEVEL 5 OK
+Ring count is 8
+Respawning...
+LEVEL 6 OK
+Ring count is 11
+Respawning...
+Bounce value: 1
+LEVEL 7 OK
+Ring count is 11
+Respawning...
+LEVEL 8 OK
+Ring count is 12
+Respawning...
+LEVEL 9 OK
+Ring count is 12
+Respawning...
+LEVEL 10 OK
+Ring count is 15
+Respawning...
+LEVEL 11 OK
+PASS: movement, pause/resume and all 11 levels instantiate
+[1;33mWARNING:[0;93m 100 RIDs of type "CanvasItem" were leaked.
+[0;90m     at: _free_rids (servers/rendering/renderer_canvas_cull.cpp:2485)[0m
+ERROR: 1 RID allocations of type 'PN13RendererDummy14TextureStorage12DummyTextureE' were leaked at exit.
+[1;33mWARNING:[0;93m ObjectDB instances leaked at exit (run with --verbose for details).
+[0;90m     at: cleanup (core/object/object.cpp:2284)[0m
+[1;31mERROR:[0;91m 2 resources still in use at exit (run with --verbose for details).
+[0;90m   at: clear (core/io/resource.cpp:604)[0m

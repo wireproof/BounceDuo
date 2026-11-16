@@ -16,6 +16,8 @@ func run():
 		if child.has_method("toggle_pause"): duo=child
 	root.size = Vector2i(1194,834)
 	await process_frame
+	duo.fill_enabled = false
+	duo._relayout()
 	duo.set_touch_controls(true)
 	var touch_scale = game.get_node("SubViewportContainer").scale.x
 	var key = InputEventKey.new()
@@ -34,6 +36,17 @@ func run():
 	duo._joy_connection_changed(0, false)
 	assert(duo.touch_controls)
 	print("PASS: keyboard/controller hide controls, touch restores, game expands")
+	for dimensions in [Vector2i(1280,900),Vector2i(1194,834)]:
+		root.size = dimensions
+		await process_frame
+		duo.fill_enabled = true
+		duo._relayout()
+		await process_frame
+		duo._relayout()
+		var canvas = game.get_node("SubViewportContainer")
+		assert(canvas.position == Vector2.ZERO)
+		assert((canvas.size * canvas.scale).distance_to(Vector2(dimensions)) < 1)
+	print("PASS: Duo and iPad landscape Fill covers full viewport")
 	duo.toggle_pause()
 	assert(paused)
 	duo.toggle_pause()
