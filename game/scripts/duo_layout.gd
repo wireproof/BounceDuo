@@ -9,6 +9,8 @@ var upscale_material: ShaderMaterial
 var upscale_enabled := true
 var last_size := Vector2.ZERO
 var last_screen := -1
+var touch_controls := true
+var last_safe_area := Rect2i()
 
 func _ready():
 	process_mode = Node.PROCESS_MODE_ALWAYS
@@ -49,7 +51,30 @@ func _ready():
 		var event := InputEventJoypadButton.new()
 		event.button_index = JOY_BUTTON_DPAD_LEFT if action == "move_left" else JOY_BUTTON_DPAD_RIGHT if action == "move_right" else JOY_BUTTON_A
 		InputMap.action_add_event(action, event)
+	Input.joy_connection_changed.connect(_joy_connection_changed)
+	touch_controls = Input.get_connected_joypads().is_empty()
 	_relayout()
+
+func _joy_connection_changed(_device: int, connected: bool):
+	if connected:
+		set_touch_controls(false)
+	elif Input.get_connected_joypads().is_empty():
+		set_touch_controls(true)
+
+func set_touch_controls(enabled: bool):
+	if touch_controls == enabled: return
+	touch_controls = enabled
+	_relayout()
+
+func _input(event):
+	if event is InputEventScreenTouch and event.pressed:
+		set_touch_controls(true)
+	elif event is InputEventKey and event.pressed and not event.echo:
+		set_touch_controls(false)
+	elif event is InputEventJoypadButton and event.pressed:
+		set_touch_controls(false)
+	elif event is InputEventJoypadMotion and absf(event.axis_value) > 0.25:
+		set_touch_controls(false)
 
 func apply_graphics():
 	manager.get_node("SubViewportContainer").material = upscale_material if upscale_enabled else null
@@ -87,16 +112,17 @@ func _notification(what):
 			_relayout()
 
 func _process(_delta):
-	if last_size != get_viewport().get_visible_rect().size or last_screen != manager.current_screen:
+	if last_size != get_viewport().get_visible_rect().size or last_screen != manager.current_screen or last_safe_area != DisplayServer.get_display_safe_area():
 		_relayout()
 
 func _relayout():
 	var size := get_viewport().get_visible_rect().size
 	if size.x < 1 or size.y < 1: return
+	last_safe_area = DisplayServer.get_display_safe_area()
 	last_size = size
 	last_screen = manager.current_screen
 	var game_visible: bool = last_screen == manager.Screens.HUD
-	var inset := 16.0
+	var inset := 8.0
 	var area := Rect2(Vector2(inset,inset),size-Vector2(inset*2,inset*2))
 	if OS.has_feature("ios"):
 		var safe := Rect2(DisplayServer.get_display_safe_area())
@@ -114,9 +140,9 @@ func _relayout():
 	var play_area := area
 	play_area.position.y += toolbar_h + gap
 	play_area.size.y -= toolbar_h + gap
-	if portrait:
+	if touch_controls and portrait:
 		play_area.size.y -= button_size + gap * 2
-	else:
+	elif touch_controls:
 		play_area.position.x += button_size * 2 + gap * 2
 		play_area.size.x -= button_size * 3 + gap * 4
 	var factor := play_area.size.x / 168.0
@@ -151,7 +177,7 @@ func _relayout():
 		panel.position = area.position + (area.size-Vector2(168,224)*f)/2
 	var controls_y := minf(origin.y+logical_h*factor+gap*2,area.end.y-button_size)
 	for i in range(3):
-		controls[i].visible = game_visible and not get_tree().paused
+		controls[i].visible = touch_controls and game_visible and not get_tree().paused
 		controls[i].scale = Vector2.ONE * button_size/32.0
 		var x := area.position.x + i*(button_size+gap)
 		if i == 2: x = area.end.x-button_size

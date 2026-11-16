@@ -4,7 +4,7 @@ Bounce Duo is an iPhone and iPad adaptation of [Mycron’s Bounce (2001) Remake]
 
 ## Download
 
-[Download the v0.1.4 prerelease](https://github.com/wireproof/BounceDuo/releases/tag/v0.1.4). The IPA is unsigned and needs signing or a compatible sideloading environment. Minimum deployment target: iOS 15. App name: **Bounce**. Bundle identifier: `com.wireproof.bounce`.
+[Download the v0.1.5 prerelease](https://github.com/wireproof/BounceDuo/releases/tag/v0.1.5). The IPA is unsigned and needs signing or a compatible sideloading environment. Minimum deployment target: iOS 15. App name: **Bounce**. Bundle identifier: `com.wireproof.bounce`.
 
 ## Features
 
@@ -12,7 +12,8 @@ Bounce Duo is an iPhone and iPad adaptation of [Mycron’s Bounce (2001) Remake]
 - Large left/right buttons grouped together and a separate jump button.
 - Adaptive portrait and landscape layouts with aspect-preserving graphics.
 - Pause, Resume, Menu, and automatic pause when the app loses focus.
-- Controller D-pad and A-button input mappings.
+- Controller D-pad and A-button input mappings. Movement buttons automatically hide on controller connection/input or keyboard use, and return on touchscreen input. Hidden controls release their reserved layout space.
+- Full-screen iPhone/iPad presentation with hidden status bar, aspect-preserving game scaling, and rotation/safe-area layout refresh.
 - Optional pixel-art edge upscaling with a saved **Smooth / Original** setting.
 - Level-unlock and high-score persistence. Continue restarts the unlocked level; it does not restore an exact mid-level snapshot.
 
@@ -20,7 +21,7 @@ The port preserves the remake’s physics and levels. The graphics option recons
 
 ## Status and verification
 
-**v0.1.4 / build 5 is a development prerelease.** The approved remastered icon is included. The iOS release build and signature checks passed; device delivery verification is recorded separately. Physical-device gameplay and visual checks have not been performed for this version.
+**v0.1.5 / build 6 is a development prerelease.** The approved remastered icon is included. The iOS release build and signature checks passed; device delivery verification is recorded separately. Physical-device gameplay and visual checks have not been performed for this version.
 
 Earlier builds received successful user gameplay feedback. Desktop checks covered movement, pause/resume, all 11 level scenes loading, and layout previews. Those checks are not a full campaign playthrough. The headless test harness has reported cleanup-time resource leaks. The published screenshots are development captures, not proof of the current physical-device appearance.
 

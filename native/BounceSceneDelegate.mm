@@ -16,6 +16,10 @@
     [self.window makeKeyAndVisible];
     NSLog(@"Bounce: Godot window connected to UIKit scene");
 }
+- (void)windowScene:(UIWindowScene *)scene didUpdateCoordinateSpace:(id<UICoordinateSpace>)previousCoordinateSpace interfaceOrientation:(UIInterfaceOrientation)previousInterfaceOrientation traitCollection:(UITraitCollection *)previousTraitCollection {
+    self.window.frame = scene.coordinateSpace.bounds;
+    [self.window.rootViewController.view setNeedsLayout];
+}
 - (void)sceneDidBecomeActive:(UIScene *)scene {
     id<UIApplicationDelegate> d = UIApplication.sharedApplication.delegate;
     if ([d respondsToSelector:@selector(applicationDidBecomeActive:)]) [d applicationDidBecomeActive:UIApplication.sharedApplication];

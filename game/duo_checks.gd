@@ -14,6 +14,26 @@ func run():
 	var duo
 	for child in game.get_children():
 		if child.has_method("toggle_pause"): duo=child
+	root.size = Vector2i(1194,834)
+	await process_frame
+	duo.set_touch_controls(true)
+	var touch_scale = game.get_node("SubViewportContainer").scale.x
+	var key = InputEventKey.new()
+	key.physical_keycode = KEY_RIGHT
+	key.pressed = true
+	duo._input(key)
+	assert(not duo.touch_controls)
+	assert(not duo.controls[0].visible)
+	assert(game.get_node("SubViewportContainer").scale.x > touch_scale)
+	var touch = InputEventScreenTouch.new()
+	touch.pressed = true
+	duo._input(touch)
+	assert(duo.touch_controls and duo.controls[0].visible)
+	duo._joy_connection_changed(0, true)
+	assert(not duo.touch_controls)
+	duo._joy_connection_changed(0, false)
+	assert(duo.touch_controls)
+	print("PASS: keyboard/controller hide controls, touch restores, game expands")
 	duo.toggle_pause()
 	assert(paused)
 	duo.toggle_pause()
@@ -25,4 +45,7 @@ func run():
 		assert(game.ring_count > 0)
 		print("LEVEL ", i+1, " OK")
 	print("PASS: movement, pause/resume and all 11 levels instantiate")
+	game.queue_free()
+	await process_frame
+	await process_frame
 	quit()
